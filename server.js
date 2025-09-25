@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 
 // Import route files
-const aiRoutes = require('./routes/aiRoutes');
-const authRoutes = require('./routes/authRoutes');
-const quizRoutes = require('./routes/quizRoutes');
-const summaryRoutes = require('./routes/summaryRoutes');
+const aiRoutes = require('./src/routes/aiRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const quizRoutes = require('./src/routes/quizRoutes');
+const summaryRoutes = require('./src/routes/summaryRoutes');
 
 dotenv.config();
 

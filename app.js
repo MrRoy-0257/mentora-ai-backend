@@ -1,12 +1,12 @@
 // server/app.js
 const express = require('express');
 const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-const aiRoutes = require('./routes/aiRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const aiRoutes = require('./src/routes/aiRoutes');
 const app = express();
-const summaryRoutes = require('./routes/summaryRoutes');
-const quizRoutes = require('./routes/quizRoutes');
-const imageRoutes = require('./routes/imageRoutes'); 
+const summaryRoutes = require('./src/routes/summaryRoutes');
+const quizRoutes = require('./src/routes/quizRoutes');
+// const imageRoutes = require('./src/routes/imageRoutes'); 
 
 // Middleware
 app.use(cors());
@@ -18,7 +18,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/summary', summaryRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/quiz', quizRoutes);
-app.use('/api/image', imageRoutes);
+// app.use('/api/image', imageRoutes);
 
 // Test Route
 app.get('/', (req, res) => {
