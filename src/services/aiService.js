@@ -3,10 +3,13 @@ const axios = require('axios');
 
 const sendToAI = async (prompt, role = 'user') => {
   try {
+    console.log('Sending prompt to AI:', prompt);
     const useOpenRouter = process.env.USE_OPENROUTER === 'true';
+    console.log('Using OpenRouter:', useOpenRouter);
     const apiKey = useOpenRouter
       ? process.env.OPENROUTER_API_KEY
       : process.env.OPENAI_API_KEY;
+console.log('API Key present:', apiKey);
 
     if (!apiKey) {
       throw new Error('API key not found. Set it in .env');
@@ -15,21 +18,23 @@ const sendToAI = async (prompt, role = 'user') => {
     const url = useOpenRouter
       ? 'https://openrouter.ai/api/v1/chat/completions'
       : 'https://api.openai.com/v1/chat/completions';
-
+  console.log('Using URL:', url);
     // Pick the best model for Mentora AI
     const model = useOpenRouter ? 'gpt-4o-mini' : 'gpt-4';
-
+console.log('Using model:', model);
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
     };
-
+console.log('Headers set:', headers);
     // OpenRouter-specific headers
     if (useOpenRouter) {
-      headers['HTTP-Referer'] = 'https://mentora-ai-backend-production.up.railway.app';
+      headers['HTTP-Referer'] = 'https://mentora-ai-backend-production.up.railway.app/';
       headers['X-Title'] = 'Mentora AI';
     }
+console.log('Headers after OpenRouter check:', headers);
 
+    // Construct the message payload
     const data = {
       model,
       messages: [
@@ -43,8 +48,9 @@ const sendToAI = async (prompt, role = 'user') => {
         },
       ],
     };
-
+    console.log('Payload data:', data);
     const response = await axios.post(url, data, { headers });
+    console.log('AI response received:', response.data);
     return response.data.choices[0].message.content.trim();
 
   } catch (err) {
