@@ -26,7 +26,7 @@ const sendToAI = async (prompt, role = 'user') => {
 
     // OpenRouter-specific headers
     if (useOpenRouter) {
-      headers['HTTP-Referer'] = 'http://localhost:5000';
+      headers['HTTP-Referer'] = 'https://mentora-ai-backend-production.up.railway.app';
       headers['X-Title'] = 'Mentora AI';
     }
 
